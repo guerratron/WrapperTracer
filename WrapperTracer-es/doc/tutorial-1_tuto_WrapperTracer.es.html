@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		 <meta name="description" content="WrapperTracer :: Rastreo de Objetos JS and its methods traits - by GUERRATRON" /> 
+		 <meta name="keywords" content="wrappertracer,js,code,debug,trait,traits,trace,tracer,wrapper,guerratron" /> 
+    <title>JSDoc: WrapperTracer :: Rastreo de Objetos JS - by GUERRATRON</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css" />
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css" />
+		<link type="text/css" rel="stylesheet" href="styles/template.css" />
+    <link id="cssTheme" type="text/css" rel="stylesheet" href="styles/template-light.css" />
+    <link type="text/css" rel="stylesheet" href="styles/template-responsive.css" />
+</head>
+
+<body>
+
+<div id="main">
+<img class="logo" title="logo WrapperTracer" src="img/wrapperTracer-logo.png" style="float:right;" />
+    <h1 class="page-title">Tutorial: Tutorial WrapperTracer</h1>
+
+    <section>
+
+<header>
+    
+
+    <h2>Tutorial WrapperTracer</h2>
+</header>
+
+<article>
+    <!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Tutorial WrapperTracer - Rastrea métodos de Objetos JS - by Juanjo Guerra Haba" />
+		<link rel="icon" href="favicon.ico" sizes="24x24" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+    <title>Tutorial 'WrapperTracer' - Rastrea métodos en Objetos JS - by GuerraTron</title>
+    <link href="./css/tuto.css" media="screen" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/WrapperTracer.min.js"></script>
+  </head>
+  
+  <body>
+
+    <div id="divTotal"><!-- BEGIN:: TOTAL DIV -->
+    
+      <header>
+        <span>WrapperTracer</span> <sub>v1.0.0</sub>
+        <p class="clearfix"></p>
+        <img src="img/WrapperTracer-logo.png" alt="logo WrapperTracer" title="WrapperTracer" />
+        <blockquote>
+          Es una <b>clase</b> <i>Javascript</i> que crea objetos ENVOLVENTES (<b>wrappers</b>) para permitir el <i>rastreo</i> (<b>tracer</b>) de los m&eacute;todos ejecutados.<br />
+          Se encarga de analizar cualquier objeto JS mostrando su <i>esqueleto</i> para hacernos una idea gráfica de cómo es su mapa interno de métodos y propiedades. También captura sus métodos inyectándoles un seguimiento para rastrear su ciclo de ejecución.					
+          <blockquote>
+            <cite><small>WrapperTracer v1.0.0<br />
+            <address>copyright @ 2015 - Juan José Guerra Haba &lt;dinertron@gmail.com&gt; <img id="torotron" src="img/torotron_logo.png" alt="torotron" title="author" /></address>
+            License: Free. GPL.v3</small></cite>
+          </blockquote>
+        </blockquote>
+        <p class="clearfix"></p>
+      </header>
+      
+      <div id="container"><!-- BEGIN:: CONTAINER DIV -->
+        <h1>Tutorial WrapperTracer</h1>
+        <nav>
+					<span class="caption">ÍNDICE:</span>
+					<ul id="TOC">
+						<li><a href="#intro" title="introducción">Introducción</a></li>
+						<li><a href="#cargarScript" title="cargar el script">Carga</a></li>
+						<li><a href="#GUI" title="Interfaz Gráfica">GUI</a></li>
+						<li><a href="#colofon" title="colofón">Colofón</a></li>
+					</ul>
+					<br class="clearfix" />
+					
+					<!--<datalist id="browsers">
+						<option value="Internet Explorer">
+						<option value="Firefox">
+						<option value="Chrome">
+						<option value="Opera">
+						<option value="Safari">
+					</datalist>
+					<input list="browsers" />-->
+				</nav>
+				<div id="intro" name="intro" class="intro">
+          <h3>Introducción:</h3>
+					<div>
+						<p>Esta clase analiza la estructura interna de cualquier <i>objeto JS</i> mostrando un <b>mapa gráfico</b> de su <i>esqueleto</i>, para poder, de un simple vistazo, estudiar su anatomía interna.</p>
+						<p>Representa de forma visual todas sus propiedades agrupándolas según su tipo. De esta forma podemos apreciar rápidamente cuántas propiedades <i>booleanas</i>, tipo <i>string</i>, <i>number</i>, etc... posee, al igual que los <i>objetos y arrays</i> que contiene. También podemos visualizar sus métodos o funciones y diferenciar si son propiedades propias (<b>OWN</b>) o <b>heredables</b> (a través de su prototipo).</p>
+						<p class="PD">Para representar cualquier propiedad éstas deben encontrarse asignadas (aunque sea a <b>undefined</b>), de lo contrario no se representarán.</p>
+					</div>
+          <p>Una vez capturado el objeto (<b>wrappeado</b>) en su envoltorio, podemos ejecutar sus métodos, quedando un registro recursivo de su ruta de ejecución, con algunos datos interesantes como el tiempo empleado en cada método o la ruta que ha seguido.<br />
+					Podría resultar muy útil como herramienta para desarrolladores y programadores de código 'javascript', al mostrar de un vistazo la estructura interna de cualquier objeto 'javascript', incluso de un <b>superobjeto</b> como '<i>window</i>'.</p>
+					<p class="PD">Con un poco de imaginación podría emplearse como herramienta de comparación de objetos similares, o de diferentes versiones.</p>
+        </div>
+
+        <div id="cargarScript" name="cargarScript">
+          <h3>Cargar y Utilizar el Script:</h3>
+					<p>Por supuesto el primer paso empieza por cargar el script en la zona <b>Head</b> de la página, por ejemplo:<br />
+              <code class="html">
+                <span>&emsp;&lt;<i class="meth">script</i> type=<i class="txt">"text/javascript"</i> src=<i class="txt">"WrapperTracer.js"</i>&gt; &lt;/<i class="meth">script</i>&gt;</span>
+              </code>
+          </p>
+					<p>Una vez cargado, el script crea una Clase GLOBAL <b>WrapperTracer</b> con la que podremos crear objetos <b>&lt;&lt;wrappeadores&gt;&gt;</b>. Su constructor admite hasta tres parámetros:</p>
+					<ul>
+						<li><b>Objeto</b> javascript: Cualquier objeto, función o librería javascript.</li>
+						<li>Elemento <b>contenedor</b>: Una cadena representando el atributo '<i>id</i>' de cualquier elemento del <abbr title="Document Object Model">DOM</abbr>, o bién el propio elemento <b>HTMLElement</b>.</li>
+						<li>Función <b>callback</b> [OPCIONAL]: Una función a modo de <i>callback</i> que será inyectada en todos los métodos del objeto.</li>
+					</ul>
+					<p>Podemos escribir código (en una etiqueta <i>&lt;script&gt;</i>) para crear el constructor y <i>capturar</i> un objeto cualquiera, <b>WrapperTracer</b> ya se encarga de construir la interfaz gráfica mostrándonos información: 
+					<code class="html">
+						<span><i class="comment">//la propiedad 'id' se corresponderá con el id de algún elemento contenedor donde ubicar toda la <abbr title="Interfaz de Usuario">UI</abbr></i></span>
+						<span><i class="comment">//Creamos el 'envoltorio':</i></span>
+						<span>var <i class="obj">wrapper</i> = new <i class="ns">WrapperTracer</i>( <i class="obj">window</i>, <i class="txt">"idContenedor"</i> );</span>
+						<span><i class="comment">//ahora creamos el objeto 'envuelto':</i></span>
+						<span>var <i class="var">wrapped</i> = <i class="obj">wrapper</i>.<i class="meth">getWrapped</i>( );</span>
+						<span><i class="comment">//ahora la variable 'wrapper' hace referencia al objeto 'envoltorio' y la variable 'wrapped' se refiere al objeto 'envuelto'</i></span>
+						<span><i title="más código ...">...</i></span>
+					</code>
+					<details>
+						<summary>Observaciones: </summary>
+						El constructor de la clase genera toda la <abbr title="Interfaz de Usuario">UI</abbr>
+						<span class="PD">El método <b>getWrapped()</b> solo nos sería de utilidad si necesitamos rastrear los métodos ejecutados.</span>
+					</details>
+        </div>
+				
+				<p class="alert">Aunque se ha realizado un esfuerzo para que la librería sea <b>cross-browser</b>, puede observarse alguna diferencia dependiendo del navegador utilizado, sobre todo "<em>IE</em>".</p>
+
+        <div id="GUI" name="GUI">
+          <h3>GUI:</h3>
+          <p>La interfaz gráfica se autoconstruye y se embebe en el elemento con el 'id' pasado como parámetro. Todo el código que necesita (javascript, css, html) se encuentra definido en el propio script '<i>WrapperTracer.js</i>', éste se encarga de mostrar dos zonas diferenciadas, el <b>Esqueleto</b> y las <b>Trazas</b>:</p>
+            <img src="./img/WrapperTracer-UI.jpg" alt="GUI zones" title="zonas GUI" style="max-width:100%;" />
+					<p>La zona del <em>esqueleto</em> puede ocultarse mediante el botón <i class="button30 btnPlusMinus" title="mostrar/ocultar esqueleto">&nbsp;</i><br />
+					Todas las propiedades están agrupadas por su tipo y se muestran con signos y mediante un código de pares de colores para diferenciar las que son <b>propias</b> (OWN) de las <b>heredadas</b> (INHERITED); con "heredadas" quiero decir que <em>&lt;&lt;deriven de su prototipo&gt;&gt;</em>.</p>
+					<p>En la zona de <b>Rasgos</b> o <b>Trazas</b> (TRAITS) se representan los métodos ejecutados en unos <b>bloques anidados</b> que muestran alguna información como los parámetros, el tiempo empleado en ejecutar el método (ELAPSED) o el resultado (RESULT), si es que retorna algo.</p>
+				</div>
+				
+				<div id="colofon" name="colofon">
+					<h3>COLOFÓN:</h3>
+					<p><b>WrapperTracer</b> se ha pensado como herramienta para desarrolladores y programadores de código 'javascript', puede resultar útil entender la estructura interna de cualquier objeto 'javascript', incluso de un <b>superobjeto</b> como '<i>window</i>', también podría utilizarse para comparar distintas versiones de scripts y sus diferencias estructurales, o como comprobación de rendimientos utilizando la medición de los diferentes tiempos de ejecución de cada método.</p>
+					<p class="alert">Animo a todos los usuarios (programadores/desarrolladores) a utilizar este script que seguro puede ser útil. Para empezar se puede experimentar con los ejemplos propuestos para ir familiarizandose con ella.</p>
+				</div><!-- END:: COLOFÓN DIV -->
+			
+      </div><!-- END:: CONTAINER DIV -->
+
+      <div id="footer" name="footer">
+        <p><b>AUTOR</b> : Espero que pueda serle de utilidad a alguien como lo ha sido para mí. En tal caso se agradecería email comentando su uso o sugerencias para futuras mejoras. (<a href="mailto:dinertron@gmail.com">guerraTron</a>) <br />
+          <span style='color:#DDDDDD;'>¡ POR FAVOR, MANTENER CRÉDITOS Y ENLACES. GRACIAS !</span></p>
+        <p><i><span style='font-family:"Century Gothic","sans-serif"'>&nbsp;... Y COMO DIRÍA 'GEORGE LUCAS': ¡¡ QUE LA FUERZA OS ACOMPA&Ntilde;E. !!</span></i></p>
+      </div>
+
+    </div><!-- END:: TOTAL DIV -->
+
+		<script type="text/javascript">
+			//PRINCIPAL
+      window.addEventListener('DOMContentLoaded',
+        function DOMContentLoaded(){
+					//UTILIDAD PARA FORMATEAR CÓDIGO DE ESTA PÁGINA, AHORRANDO UNAS CUANTAS LÍNEAS.
+					function formatCode(classArray){
+						if(classArray.pop){	//si es un array
+							classArray.forEach(function(c){
+									var codeObjs = document.getElementsByClassName(c);
+									for(var i=0; i<codeObjs.length; i++){
+										var e = codeObjs[i];
+										if(e){ e.title = c; }
+									};
+							});
+						}
+					}
+					formatCode(["var", "ns", "prop", "param", "func", "obj", "meth", "nfunc", "txt", "comment", "bool"]);
+        }
+      , false);
+		</script>
+  </body>
+</html>
+
+</article>
+
+</section>
+
+</div>
+
+<nav>
+    <h2 class="itemsNav"><a href="index.html">Home</a></h2><div class="container-button-menu media600"><i class="button-menu media600">&nabla;</i></div><h3 class="itemsNav-media600 media600"><a href="index.html">Home</a></h3><div class="itemsNav"><h3>Modules</h3><ul><li><a href="module-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Modules</h4><ul><li><a href="module-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav"><h3>Classes</h3><ul><li><a href="module-WrapperTracer-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Classes</h4><ul><li><a href="module-WrapperTracer-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav"><h3>Namespaces</h3><ul><li><a href="WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Namespaces</h4><ul><li><a href="WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav"><h3>Tutorials</h3><ul><li><a href="tutorial-1_tuto_WrapperTracer.es.html">Tutorial WrapperTracer</a></li><li><a href="tutorial-2_examples_WrapperTracer.es.html">Ejemplo 1. Objetos Simples y Complejos</a></li><li><a href="tutorial-3_examples_WrapperTracer2.es.html">Ejemplo 2. Comparar Objetos</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Tutorials</h4><ul><li><a href="tutorial-1_tuto_WrapperTracer.es.html">Tutorial WrapperTracer</a></li><li><a href="tutorial-2_examples_WrapperTracer.es.html">Ejemplo 1. Objetos Simples y Complejos</a></li><li><a href="tutorial-3_examples_WrapperTracer2.es.html">Ejemplo 2. Comparar Objetos</a></li></ul></div><div class="itemsNav"><h3>Debug :: <small>Objects</small></h3><ul><li><a href="#debug-zone-this" onclick="debugShowHide('this')" title="Debug show/hide">Object "this"</a></li><li><a href="#debug-zone-env" onclick="debugShowHide('env')" title="Debug show/hide">Object "env"</a></li><li><a href="#debug-zone-data" onclick="debugShowHide('data')" title="Debug show/hide">Object "data"</a></li><li><a href="#debug-zone-templates" onclick="debugShowHide('templates')" title="Debug show/hide">Object "templates"</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Debug :: <small>Objects</small></h4><ul><li><a href="#debug-zone-this" onclick="debugShowHide('this')" title="Debug show/hide">Object "this"</a></li><li><a href="#debug-zone-env" onclick="debugShowHide('env')" title="Debug show/hide">Object "env"</a></li><li><a href="#debug-zone-data" onclick="debugShowHide('data')" title="Debug show/hide">Object "data"</a></li><li><a href="#debug-zone-templates" onclick="debugShowHide('templates')" title="Debug show/hide">Object "templates"</a></li></ul></div>
+</nav>
+
+<br class="clear">
+
+
+	<footer>
+			<hr /> Documentación generada por <strong><a href='mailto:dinertron@gmail.com' title='author'>GuerraTron</a></strong> en <em>Fri Apr 29 2016 01:25:49 GMT+0200 (Hora de verano romance)</em> <br /> &copy; <em>Juan Jose Guerra Haba (c) 2016</em> <hr />
+	</footer>
+
+
+  
+    <select class="changeTheme" id="selCssTheme" default="light" title="change theme">
+      <option value="light" selected>Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  
+  
+<a data-scroll data-options='{ "easing": "easeOutQuad" }' class="totop" href="#" title="to Top"><span style="font-size: x-large">&Delta;</span></a>
+
+
+
+		<div class="debug" id="debug-zone-this" name="debug-zone-this" style="background: #333333; color:#FF0000; border:1px ridge maroon; padding:6px; display:none;">
+<h4 style="background:whiteSmoke; color:maroon;">DEBUG: this {Object} <small style="color:#333333; background:lightYellow; padding:2px; font-size:smaller; float:right; margin-right:10px;">PAGE: layout</small><br style="clear:both;" /></h4>
+<div class="debug-inner-path" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">path</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl</code>
+</small><br />
+</div>
+<div class="debug-inner-layout" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">layout</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">layout.tmpl</code>
+</small><br />
+</div>
+<div class="debug-inner-cache" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">cache</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\container.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\container.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\source.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\source.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\layout.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\layout.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\mainpage.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\mainpage.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\members.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\members.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\details.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\details.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\properties.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\properties.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\type.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\type.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\method.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\method.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\params.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\params.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\returns.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\returns.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\examples.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\examples.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+<div class="debug-inner-C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\tutorial.tmpl" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron\tmpl\tutorial.tmpl</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (data) {
+      return render.call(this, data, _);
+    }</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-settings" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">settings</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-evaluate" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">evaluate</h5> [<span style="color:whiteSmoke; font-size:10px;">RegExp</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">/<\?js([\s\S]+?)\?>/g</code>
+</small><br />
+</div>
+<div class="debug-inner-interpolate" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">interpolate</h5> [<span style="color:whiteSmoke; font-size:10px;">RegExp</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">/<\?js=([\s\S]+?)\?>/g</code>
+</small><br />
+</div>
+<div class="debug-inner-escape" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">escape</h5> [<span style="color:whiteSmoke; font-size:10px;">RegExp</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">/<\?js~([\s\S]+?)\?>/g</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-find" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">find</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function find(spec) {
+    return helper.find(data, spec);
+}</code>
+</small><br />
+</div>
+<div class="debug-inner-linkto" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">linkto</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (longname, linkText, cssClass, fragmentId) {
+    return buildLink(longname, linkText, {
+        cssClass: cssClass,
+        fragmentId: fragmentId,
+        linkMap: longnameToUrl
+    });
+}</code>
+</small><br />
+</div>
+<div class="debug-inner-resolveAuthorLinks" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">resolveAuthorLinks</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (str) {
+    var author;
+    var matches = str.match(/^\s?([\s\S]+)\b\s+<(\S+@\S+)>\s?$/);
+    if (matches && matches.length === 3) {
+        author = '<a href="mailto:' + matches[2] + '">' + htmlsafe(matches[1]) + '</a>';
+    }
+    else {
+        author = htmlsafe(str);
+    }
+
+    return author;
+}</code>
+</small><br />
+</div>
+<div class="debug-inner-tutoriallink" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">tutoriallink</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function tutoriallink(tutorial) {
+    return helper.toTutorial(tutorial, null, { tag: 'em', classname: 'disabled', prefix: 'Tutorial: ' });
+}</code>
+</small><br />
+</div>
+<div class="debug-inner-htmlsafe" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">htmlsafe</h5> [<span style="color:whiteSmoke; font-size:10px;">function</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">function (str) {
+    if (typeof str !== 'string') {
+        str = String(str);
+    }
+
+    return str.replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;');
+}</code>
+</small><br />
+</div>
+<div class="debug-inner-outputSourceFiles" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">outputSourceFiles</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-debugObjectView" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">debugObjectView</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+
+</small><br />
+</div>
+<div class="debug-inner-nav" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">nav</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"><h2 class="itemsNav"><a href="index.html">Home</a></h2><div class="container-button-menu media600"><i class="button-menu media600">&nabla;</i></div><h3 class="itemsNav-media600 media600"><a href="index.html">Home</a></h3><div class="itemsNav"><h3>Modules</h3><ul><li><a href="module-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Modules</h4><ul><li><a href="module-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav"><h3>Classes</h3><ul><li><a href="module-WrapperTracer-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Classes</h4><ul><li><a href="module-WrapperTracer-WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav"><h3>Namespaces</h3><ul><li><a href="WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Namespaces</h4><ul><li><a href="WrapperTracer.html">WrapperTracer</a></li></ul></div><div class="itemsNav"><h3>Tutorials</h3><ul><li><a href="tutorial-1_tuto_WrapperTracer.es.html">Tutorial WrapperTracer</a></li><li><a href="tutorial-2_examples_WrapperTracer.es.html">Ejemplo 1. Objetos Simples y Complejos</a></li><li><a href="tutorial-3_examples_WrapperTracer2.es.html">Ejemplo 2. Comparar Objetos</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Tutorials</h4><ul><li><a href="tutorial-1_tuto_WrapperTracer.es.html">Tutorial WrapperTracer</a></li><li><a href="tutorial-2_examples_WrapperTracer.es.html">Ejemplo 1. Objetos Simples y Complejos</a></li><li><a href="tutorial-3_examples_WrapperTracer2.es.html">Ejemplo 2. Comparar Objetos</a></li></ul></div><div class="itemsNav"><h3>Debug :: <small>Objects</small></h3><ul><li><a href="#debug-zone-this" onclick="debugShowHide('this')" title="Debug show/hide">Object "this"</a></li><li><a href="#debug-zone-env" onclick="debugShowHide('env')" title="Debug show/hide">Object "env"</a></li><li><a href="#debug-zone-data" onclick="debugShowHide('data')" title="Debug show/hide">Object "data"</a></li><li><a href="#debug-zone-templates" onclick="debugShowHide('templates')" title="Debug show/hide">Object "templates"</a></li></ul></div><div class="itemsNav-media600 media600"><h4>Debug :: <small>Objects</small></h4><ul><li><a href="#debug-zone-this" onclick="debugShowHide('this')" title="Debug show/hide">Object "this"</a></li><li><a href="#debug-zone-env" onclick="debugShowHide('env')" title="Debug show/hide">Object "env"</a></li><li><a href="#debug-zone-data" onclick="debugShowHide('data')" title="Debug show/hide">Object "data"</a></li><li><a href="#debug-zone-templates" onclick="debugShowHide('templates')" title="Debug show/hide">Object "templates"</a></li></ul></div></code>
+</small><br />
+</div>
+<div class="debug-inner-debug" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">debug</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+</div> 
+		<div class="debug" id="debug-zone-data" name="debug-zone-data" style="background: #333333; color:#FF0000; border:1px ridge maroon; padding:6px; display:none;">
+<h4 style="background:whiteSmoke; color:maroon;">DEBUG: data {Object} <small style="color:#333333; background:lightYellow; padding:2px; font-size:smaller; float:right; margin-right:10px;">PAGE: layout</small><br style="clear:both;" /></h4>
+<div class="debug-inner-title" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">title</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">Tutorial: Tutorial WrapperTracer</code>
+</small><br />
+</div>
+<div class="debug-inner-header" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">header</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">Tutorial WrapperTracer</code>
+</small><br />
+</div>
+<div class="debug-inner-content" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">content</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"><section>
+
+<header>
+    
+
+    <h2>Tutorial WrapperTracer</h2>
+</header>
+
+<article>
+    <!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Tutorial WrapperTracer - Rastrea métodos de Objetos JS - by Juanjo Guerra Haba" />
+		<link rel="icon" href="favicon.ico" sizes="24x24" type="image/x-icon">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+    <title>Tutorial 'WrapperTracer' - Rastrea métodos en Objetos JS - by GuerraTron</title>
+    <link href="./css/tuto.css" media="screen" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/WrapperTracer.min.js"></script>
+  </head>
+  
+  <body>
+
+    <div id="divTotal"><!-- BEGIN:: TOTAL DIV -->
+    
+      <header>
+        <span>WrapperTracer</span> <sub>v1.0.0</sub>
+        <p class="clearfix"></p>
+        <img src="img/WrapperTracer-logo.png" alt="logo WrapperTracer" title="WrapperTracer" />
+        <blockquote>
+          Es una <b>clase</b> <i>Javascript</i> que crea objetos ENVOLVENTES (<b>wrappers</b>) para permitir el <i>rastreo</i> (<b>tracer</b>) de los m&eacute;todos ejecutados.<br />
+          Se encarga de analizar cualquier objeto JS mostrando su <i>esqueleto</i> para hacernos una idea gráfica de cómo es su mapa interno de métodos y propiedades. También captura sus métodos inyectándoles un seguimiento para rastrear su ciclo de ejecución.					
+          <blockquote>
+            <cite><small>WrapperTracer v1.0.0<br />
+            <address>copyright @ 2015 - Juan José Guerra Haba &lt;dinertron@gmail.com&gt; <img id="torotron" src="img/torotron_logo.png" alt="torotron" title="author" /></address>
+            License: Free. GPL.v3</small></cite>
+          </blockquote>
+        </blockquote>
+        <p class="clearfix"></p>
+      </header>
+      
+      <div id="container"><!-- BEGIN:: CONTAINER DIV -->
+        <h1>Tutorial WrapperTracer</h1>
+        <nav>
+					<span class="caption">ÍNDICE:</span>
+					<ul id="TOC">
+						<li><a href="#intro" title="introducción">Introducción</a></li>
+						<li><a href="#cargarScript" title="cargar el script">Carga</a></li>
+						<li><a href="#GUI" title="Interfaz Gráfica">GUI</a></li>
+						<li><a href="#colofon" title="colofón">Colofón</a></li>
+					</ul>
+					<br class="clearfix" />
+					
+					<!--<datalist id="browsers">
+						<option value="Internet Explorer">
+						<option value="Firefox">
+						<option value="Chrome">
+						<option value="Opera">
+						<option value="Safari">
+					</datalist>
+					<input list="browsers" />-->
+				</nav>
+				<div id="intro" name="intro" class="intro">
+          <h3>Introducción:</h3>
+					<div>
+						<p>Esta clase analiza la estructura interna de cualquier <i>objeto JS</i> mostrando un <b>mapa gráfico</b> de su <i>esqueleto</i>, para poder, de un simple vistazo, estudiar su anatomía interna.</p>
+						<p>Representa de forma visual todas sus propiedades agrupándolas según su tipo. De esta forma podemos apreciar rápidamente cuántas propiedades <i>booleanas</i>, tipo <i>string</i>, <i>number</i>, etc... posee, al igual que los <i>objetos y arrays</i> que contiene. También podemos visualizar sus métodos o funciones y diferenciar si son propiedades propias (<b>OWN</b>) o <b>heredables</b> (a través de su prototipo).</p>
+						<p class="PD">Para representar cualquier propiedad éstas deben encontrarse asignadas (aunque sea a <b>undefined</b>), de lo contrario no se representarán.</p>
+					</div>
+          <p>Una vez capturado el objeto (<b>wrappeado</b>) en su envoltorio, podemos ejecutar sus métodos, quedando un registro recursivo de su ruta de ejecución, con algunos datos interesantes como el tiempo empleado en cada método o la ruta que ha seguido.<br />
+					Podría resultar muy útil como herramienta para desarrolladores y programadores de código 'javascript', al mostrar de un vistazo la estructura interna de cualquier objeto 'javascript', incluso de un <b>superobjeto</b> como '<i>window</i>'.</p>
+					<p class="PD">Con un poco de imaginación podría emplearse como herramienta de comparación de objetos similares, o de diferentes versiones.</p>
+        </div>
+
+        <div id="cargarScript" name="cargarScript">
+          <h3>Cargar y Utilizar el Script:</h3>
+					<p>Por supuesto el primer paso empieza por cargar el script en la zona <b>Head</b> de la página, por ejemplo:<br />
+              <code class="html">
+                <span>&emsp;&lt;<i class="meth">script</i> type=<i class="txt">"text/javascript"</i> src=<i class="txt">"WrapperTracer.js"</i>&gt; &lt;/<i class="meth">script</i>&gt;</span>
+              </code>
+          </p>
+					<p>Una vez cargado, el script crea una Clase GLOBAL <b>WrapperTracer</b> con la que podremos crear objetos <b>&lt;&lt;wrappeadores&gt;&gt;</b>. Su constructor admite hasta tres parámetros:</p>
+					<ul>
+						<li><b>Objeto</b> javascript: Cualquier objeto, función o librería javascript.</li>
+						<li>Elemento <b>contenedor</b>: Una cadena representando el atributo '<i>id</i>' de cualquier elemento del <abbr title="Document Object Model">DOM</abbr>, o bién el propio elemento <b>HTMLElement</b>.</li>
+						<li>Función <b>callback</b> [OPCIONAL]: Una función a modo de <i>callback</i> que será inyectada en todos los métodos del objeto.</li>
+					</ul>
+					<p>Podemos escribir código (en una etiqueta <i>&lt;script&gt;</i>) para crear el constructor y <i>capturar</i> un objeto cualquiera, <b>WrapperTracer</b> ya se encarga de construir la interfaz gráfica mostrándonos información: 
+					<code class="html">
+						<span><i class="comment">//la propiedad 'id' se corresponderá con el id de algún elemento contenedor donde ubicar toda la <abbr title="Interfaz de Usuario">UI</abbr></i></span>
+						<span><i class="comment">//Creamos el 'envoltorio':</i></span>
+						<span>var <i class="obj">wrapper</i> = new <i class="ns">WrapperTracer</i>( <i class="obj">window</i>, <i class="txt">"idContenedor"</i> );</span>
+						<span><i class="comment">//ahora creamos el objeto 'envuelto':</i></span>
+						<span>var <i class="var">wrapped</i> = <i class="obj">wrapper</i>.<i class="meth">getWrapped</i>( );</span>
+						<span><i class="comment">//ahora la variable 'wrapper' hace referencia al objeto 'envoltorio' y la variable 'wrapped' se refiere al objeto 'envuelto'</i></span>
+						<span><i title="más código ...">...</i></span>
+					</code>
+					<details>
+						<summary>Observaciones: </summary>
+						El constructor de la clase genera toda la <abbr title="Interfaz de Usuario">UI</abbr>
+						<span class="PD">El método <b>getWrapped()</b> solo nos sería de utilidad si necesitamos rastrear los métodos ejecutados.</span>
+					</details>
+        </div>
+				
+				<p class="alert">Aunque se ha realizado un esfuerzo para que la librería sea <b>cross-browser</b>, puede observarse alguna diferencia dependiendo del navegador utilizado, sobre todo "<em>IE</em>".</p>
+
+        <div id="GUI" name="GUI">
+          <h3>GUI:</h3>
+          <p>La interfaz gráfica se autoconstruye y se embebe en el elemento con el 'id' pasado como parámetro. Todo el código que necesita (javascript, css, html) se encuentra definido en el propio script '<i>WrapperTracer.js</i>', éste se encarga de mostrar dos zonas diferenciadas, el <b>Esqueleto</b> y las <b>Trazas</b>:</p>
+            <img src="./img/WrapperTracer-UI.jpg" alt="GUI zones" title="zonas GUI" style="max-width:100%;" />
+					<p>La zona del <em>esqueleto</em> puede ocultarse mediante el botón <i class="button30 btnPlusMinus" title="mostrar/ocultar esqueleto">&nbsp;</i><br />
+					Todas las propiedades están agrupadas por su tipo y se muestran con signos y mediante un código de pares de colores para diferenciar las que son <b>propias</b> (OWN) de las <b>heredadas</b> (INHERITED); con "heredadas" quiero decir que <em>&lt;&lt;deriven de su prototipo&gt;&gt;</em>.</p>
+					<p>En la zona de <b>Rasgos</b> o <b>Trazas</b> (TRAITS) se representan los métodos ejecutados en unos <b>bloques anidados</b> que muestran alguna información como los parámetros, el tiempo empleado en ejecutar el método (ELAPSED) o el resultado (RESULT), si es que retorna algo.</p>
+				</div>
+				
+				<div id="colofon" name="colofon">
+					<h3>COLOFÓN:</h3>
+					<p><b>WrapperTracer</b> se ha pensado como herramienta para desarrolladores y programadores de código 'javascript', puede resultar útil entender la estructura interna de cualquier objeto 'javascript', incluso de un <b>superobjeto</b> como '<i>window</i>', también podría utilizarse para comparar distintas versiones de scripts y sus diferencias estructurales, o como comprobación de rendimientos utilizando la medición de los diferentes tiempos de ejecución de cada método.</p>
+					<p class="alert">Animo a todos los usuarios (programadores/desarrolladores) a utilizar este script que seguro puede ser útil. Para empezar se puede experimentar con los ejemplos propuestos para ir familiarizandose con ella.</p>
+				</div><!-- END:: COLOFÓN DIV -->
+			
+      </div><!-- END:: CONTAINER DIV -->
+
+      <div id="footer" name="footer">
+        <p><b>AUTOR</b> : Espero que pueda serle de utilidad a alguien como lo ha sido para mí. En tal caso se agradecería email comentando su uso o sugerencias para futuras mejoras. (<a href="mailto:dinertron@gmail.com">guerraTron</a>) <br />
+          <span style='color:#DDDDDD;'>¡ POR FAVOR, MANTENER CRÉDITOS Y ENLACES. GRACIAS !</span></p>
+        <p><i><span style='font-family:"Century Gothic","sans-serif"'>&nbsp;... Y COMO DIRÍA 'GEORGE LUCAS': ¡¡ QUE LA FUERZA OS ACOMPA&Ntilde;E. !!</span></i></p>
+      </div>
+
+    </div><!-- END:: TOTAL DIV -->
+
+		<script type="text/javascript">
+			//PRINCIPAL
+      window.addEventListener('DOMContentLoaded',
+        function DOMContentLoaded(){
+					//UTILIDAD PARA FORMATEAR CÓDIGO DE ESTA PÁGINA, AHORRANDO UNAS CUANTAS LÍNEAS.
+					function formatCode(classArray){
+						if(classArray.pop){	//si es un array
+							classArray.forEach(function(c){
+									var codeObjs = document.getElementsByClassName(c);
+									for(var i=0; i<codeObjs.length; i++){
+										var e = codeObjs[i];
+										if(e){ e.title = c; }
+									};
+							});
+						}
+					}
+					formatCode(["var", "ns", "prop", "param", "func", "obj", "meth", "nfunc", "txt", "comment", "bool"]);
+        }
+      , false);
+		</script>
+  </body>
+</html>
+
+</article>
+
+</section>
+</code>
+</small><br />
+</div>
+<div class="debug-inner-children" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">children</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"></code>
+</small><br />
+</div>
+</div>
+		<div class="debug" id="debug-zone-env" name="debug-zone-env" style="background: #333333; color:#FF0000; border:1px ridge maroon; padding:6px; display:none;">
+<h4 style="background:whiteSmoke; color:maroon;">DEBUG: env {Object} <small style="color:#333333; background:lightYellow; padding:2px; font-size:smaller; float:right; margin-right:10px;">PAGE: layout</small><br style="clear:both;" /></h4>
+<div class="debug-inner-run" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">run</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-start" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">start</h5> [<span style="color:whiteSmoke; font-size:10px;">Date</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">Fri Apr 29 2016 01:25:46 GMT+0200 (Hora de verano romance)</code>
+</small><br />
+</div>
+<div class="debug-inner-finish" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">finish</h5> [<span style="color:whiteSmoke; font-size:10px;">Null</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">null</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-args" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">args</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">-c,C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\jsdoc.conf.es.json</code>
+</small><br />
+</div>
+<div class="debug-inner-conf" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">conf</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-tags" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">tags</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-allowUnknownTags" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">allowUnknownTags</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-dictionaries" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">dictionaries</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">jsdoc,closure</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-templates" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">templates</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-monospaceLinks" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">monospaceLinks</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-cleverLinks" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">cleverLinks</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">false</code>
+</small><br />
+</div>
+<div class="debug-inner-logoFile" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">logoFile</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">img/wrapperTracer-logo.png</code>
+</small><br />
+</div>
+<div class="debug-inner-dateFormat" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">dateFormat</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">ddd MMM Do YYYY</code>
+</small><br />
+</div>
+<div class="debug-inner-applicationName" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">applicationName</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer</code>
+</small><br />
+</div>
+<div class="debug-inner-systemName" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">systemName</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer :: Rastreo de Objetos JS - by GUERRATRON</code>
+</small><br />
+</div>
+<div class="debug-inner-default" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">default</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-staticFiles" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">staticFiles</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-include" style="color:#FFFF66; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">include</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./static</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-layoutFile" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">layoutFile</h5> [<span style="color:whiteSmoke; font-size:10px;">string</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"></code>
+</small><br />
+</div>
+<div class="debug-inner-outputSourceFiles" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">outputSourceFiles</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-includeDate" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">includeDate</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-useLongnameInNav" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">useLongnameInNav</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">false</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-debug" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">debug</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-logo" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">logo</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">img/wrapperTracer-logo.png</code>
+</small><br />
+</div>
+<div class="debug-inner-responsive" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">responsive</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-author" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">author</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"><a href='mailto:dinertron@gmail.com' title='author'>GuerraTron</a></code>
+</small><br />
+</div>
+<div class="debug-inner-footer" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">footer</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">$HR$ Documentación generada por $AUTHOR$ en $DATE$ $BR$ $COPYRIGHT$ $HR$</code>
+</small><br />
+</div>
+<div class="debug-inner-copyright" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">copyright</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">Juan Jose Guerra Haba (c) 2016</code>
+</small><br />
+</div>
+<div class="debug-inner-theme" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">theme</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">light</code>
+</small><br />
+</div>
+<div class="debug-inner-changeTheme" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">changeTheme</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-totop" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">totop</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-meta" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">meta</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-title" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">title</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer :: Rastreo de Objetos JS - by GUERRATRON</code>
+</small><br />
+</div>
+<div class="debug-inner-description" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">description</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer :: Rastreo de Objetos JS and its methods traits - by GUERRATRON</code>
+</small><br />
+</div>
+<div class="debug-inner-keywords" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">keywords</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">wrappertracer,js,code,debug,trait,traits,trace,tracer,wrapper,guerratron</code>
+</small><br />
+</div>
+<div class="debug-inner-charset" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">charset</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">utf-8</code>
+</small><br />
+</div>
+<div class="debug-inner-language" style="color:#FF6666; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">language</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">es</code>
+</small><br />
+</div>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-source" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">source</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-includePattern" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">includePattern</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">.+\.js(doc)?$</code>
+</small><br />
+</div>
+<div class="debug-inner-excludePattern" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">excludePattern</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">(^|\/|\\)_</code>
+</small><br />
+</div>
+<div class="debug-inner-include" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">include</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer.es.js</code>
+</small><br />
+</div>
+<div class="debug-inner-exclude" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">exclude</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./static/*.*,./help/*.*,./doc/*.*,./img/*.*,./examples/*.*,./tutorial/*.*</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-plugins" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">plugins</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">C:\Program Files\nodejs\node_modules\jsdoc\plugins\markdown,C:\Program Files\nodejs\node_modules\jsdoc\plugins\summarize</code>
+</small><br />
+</div>
+<div class="debug-inner-package" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">package</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-name" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">name</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer/WrapperTracer-es</code>
+</small><br />
+</div>
+<div class="debug-inner-version" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">version</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">1.0.0</code>
+</small><br />
+</div>
+<div class="debug-inner-description" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">description</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">Rastreo de métodos de Objetos JS</code>
+</small><br />
+</div>
+<div class="debug-inner-main" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">main</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer.es.js</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-opts" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">opts</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-encoding" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">encoding</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">utf8</code>
+</small><br />
+</div>
+<div class="debug-inner-destination" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">destination</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./doc/</code>
+</small><br />
+</div>
+<div class="debug-inner-recurse" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">recurse</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-tutorials" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">tutorials</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./tutorial</code>
+</small><br />
+</div>
+<div class="debug-inner-readme" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">readme</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./help/LEEME.md</code>
+</small><br />
+</div>
+<div class="debug-inner-template" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">template</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./templates/doctron</code>
+</small><br />
+</div>
+<div class="debug-inner-query" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">query</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">value</code>
+</small><br />
+</div>
+<div class="debug-inner-private" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">private</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-lenient" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">lenient</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-dirname" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">dirname</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">C:\Program Files\nodejs\node_modules\jsdoc</code>
+</small><br />
+</div>
+<div class="debug-inner-pwd" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">pwd</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es</code>
+</small><br />
+</div>
+<div class="debug-inner-opts" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">opts</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-_" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">_</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer.es.js</code>
+</small><br />
+</div>
+<div class="debug-inner-configure" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">configure</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\jsdoc.conf.es.json</code>
+</small><br />
+</div>
+<div class="debug-inner-encoding" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">encoding</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">utf8</code>
+</small><br />
+</div>
+<div class="debug-inner-destination" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">destination</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./doc/</code>
+</small><br />
+</div>
+<div class="debug-inner-recurse" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">recurse</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-tutorials" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">tutorials</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./tutorial</code>
+</small><br />
+</div>
+<div class="debug-inner-readme" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">readme</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"><blockquote>
+<hr>
+<p>  'WrapperTracer' (Class JS) - Analiza y Rastrea Objetos JS.<br>  Author: Juan José Guerra Haba - <a href="&#109;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#x64;&#105;&#110;&#101;&#114;&#116;&#x72;&#111;&#x6e;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#x64;&#105;&#110;&#101;&#114;&#116;&#x72;&#111;&#x6e;&#x40;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a> - Marzo de 2016<br>  License: Free BSD. &amp; Open GPL v.3. Keep credit, please.<br>  Versión: 1.0.0 BETA<br>  File: WrapperTracer.js               Main Class: WrapperTracer.js  </p>
+<hr>
+</blockquote>
+<h1>WrapperTracer</h1><p><a href="http://guerratron.github.io/WrapperTracer" title="Página WrapperTracer"><img src="img/WrapperTracer-logo.png" alt="WrapperTracer logo" title="Página Github WrapperTracer"></a>
+Es una <em>clase</em> <strong>Javascript</strong> que crea objetos ENVOLVENTES (<em>wrappers</em>) para permitir el <strong>rastreo</strong> (<em>tracer</em>) de los m&eacute;todos ejecutados.  </p>
+<h2>Características</h2><ol>
+<li>No altera de ninguna manera el objeto original</li>
+<li>Cross-browser</li>
+<li>Enteramente OOP</li>
+<li>Filosofía MVC</li>
+<li>Reducci&oacute;n al m&iacute;nimo del c&oacute;digo a emplear por el usuario.</li>
+</ol>
+<h2>Utilización</h2><p>S&iacute;mplemente llamar al constructor con dos par&aacute;metros: El objeto a <strong>rastrear</strong> y el elemento contenedor <strong>DOMElement</strong> que albergar&aacute; los resultados para la Interfaz Gr&aacute;fica. El par&aacute;metro del elemento contenedor puede ser una cadena de texto con el <strong>id</strong> del elemento.<br>Ej:  </p>
+<pre class="prettyprint source lang-javascript"><code>    var wrapped = new WrapperTracer(obj1, &quot;containerUI&quot;);</code></pre><p>Por supuesto se debe cargar antes el <strong>script</strong> en la cabecera del HTML. </p>
+<pre class="prettyprint source lang-HTML"><code>&lt;script type=&quot;text/javascript&quot; src=&quot;WrapperTracer.js&quot;>&lt;/script></code></pre><h2>Explicación</h2><p>Sirve de <strong>TRACER</strong> para obtener una representaci&oacute;n visual del ciclo de ejecuci&oacute;n de los m&eacute;todos, as&iacute; como de ayuda con informaci&oacute;n (tiempos empleados, anidaci&oacute;n, tipos de m&eacute;todos, par&aacute;metros, ...).<br>Con s&oacute;lo dos par&aacute;metros necesarios: El 'objeto original' y el elemento <em>'DOM contenedor'</em>, obtenemos el objeto <em>'wrapped'</em> y toda la intefaz visual.<br>Esta <em>'clase'</em> se apoya prof&uacute;samente en las funciones de utilidad que contiene otro objeto implementado en este mismo archivo, el objeto <strong>'UTIL'</strong>, que contiene m&eacute;todos y objetos est&aacute;ticos que, aunque est&aacute;n orientados de forma espec&iacute;fica para el objeto <em>'wrapper'</em>, podr&iacute;an utilizarse fuera del mismo siguiendo su <em>'classpath'</em>.</p>
+<h2>API Pública</h2><dl>
+    <dt>Constructor</dt>
+        <dd> WrapperTracer (object, idElement, callback);</dd>
+    <dt>Getters</dt>
+        <dd>getId ();</dd>
+        <dd>getTarget ();</dd>
+        <dd>getWrapped ();</dd>
+        <dd>getCallback ();</dd>
+        <dd>getProps ();</dd>
+        <dd>getInfo ();</dd>
+        <dd>getContainer ();</dd>
+        <dd>getUtil ()</dd>
+    <dt>Setters</dt>
+        <dd>setContainer (idElement);</dd>
+</dl>
+
+<h2>Autoría</h2><p>Creado y Desarrollado íntegramente por Juan José Guerra Haba. &lt;dinertron@gmail.com&gt;<br>Copyright 2015 &copy; <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#100;&#105;&#110;&#x65;&#x72;&#x74;&#114;&#x6f;&#110;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;" title="author">GuerraTron</a><br>License GPL v3</p>
+<h3>Desarrollo Y Herramientas</h3><p>Creado con <a href="https://github.com/Nodeclipse/nodeclipse-1">Nodeclipse</a>
+ (<a href="http://marketplace.eclipse.org/content/nodeclipse">Eclipse Marketplace</a>, <a href="http://www.nodeclipse.org">site</a>)<br>Nodeclipse es software libre de código abierto, un proyecto que se mantiene con sus contribuciones.<br>Depuración con Firefox + Firebug.<br>Edición adicional y limpieza  con Notepad++  </p></code>
+</small><br />
+</div>
+<div class="debug-inner-template" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">template</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\templates\doctron</code>
+</small><br />
+</div>
+<div class="debug-inner-query" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">query</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">value</code>
+</small><br />
+</div>
+<div class="debug-inner-private" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">private</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-lenient" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">lenient</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-sourceFiles" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">sourceFiles</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">C:\Users\Paula\workspace_LUNA\WrapperTracer\jsDOC\WrapperTracer-es\WrapperTracer.es.js</code>
+</small><br />
+</div>
+<div class="debug-inner-version" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">version</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-number" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">number</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">3.4.0</code>
+</small><br />
+</div>
+<div class="debug-inner-revision" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">revision</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">Tue, 10 Nov 2015 00:28:09 GMT</code>
+</small><br />
+</div>
+</small><br />
+</div>
+</div>
+		<div class="debug" id="debug-zone-templates" name="debug-zone-templates" style="background: #333333; color:#FF0000; border:1px ridge maroon; padding:6px; display:none;">
+<h4 style="background:whiteSmoke; color:maroon;">DEBUG: templates {Object} <small style="color:#333333; background:lightYellow; padding:2px; font-size:smaller; float:right; margin-right:10px;">PAGE: layout</small><br style="clear:both;" /></h4>
+<div class="debug-inner-monospaceLinks" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">monospaceLinks</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-cleverLinks" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">cleverLinks</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">false</code>
+</small><br />
+</div>
+<div class="debug-inner-logoFile" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">logoFile</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">img/wrapperTracer-logo.png</code>
+</small><br />
+</div>
+<div class="debug-inner-dateFormat" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">dateFormat</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">ddd MMM Do YYYY</code>
+</small><br />
+</div>
+<div class="debug-inner-applicationName" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">applicationName</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer</code>
+</small><br />
+</div>
+<div class="debug-inner-systemName" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">systemName</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer :: Rastreo de Objetos JS - by GUERRATRON</code>
+</small><br />
+</div>
+<div class="debug-inner-default" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">default</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-staticFiles" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">staticFiles</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-include" style="color:#FF0066; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">include</h5> [<span style="color:whiteSmoke; font-size:10px;">Array</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">./static</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-layoutFile" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">layoutFile</h5> [<span style="color:whiteSmoke; font-size:10px;">string</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"></code>
+</small><br />
+</div>
+<div class="debug-inner-outputSourceFiles" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">outputSourceFiles</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-includeDate" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">includeDate</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-useLongnameInNav" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">useLongnameInNav</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">false</code>
+</small><br />
+</div>
+</small><br />
+</div>
+<div class="debug-inner-debug" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">debug</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-logo" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">logo</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">img/wrapperTracer-logo.png</code>
+</small><br />
+</div>
+<div class="debug-inner-responsive" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">responsive</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-author" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">author</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;"><a href='mailto:dinertron@gmail.com' title='author'>GuerraTron</a></code>
+</small><br />
+</div>
+<div class="debug-inner-footer" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">footer</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">$HR$ Documentación generada por $AUTHOR$ en $DATE$ $BR$ $COPYRIGHT$ $HR$</code>
+</small><br />
+</div>
+<div class="debug-inner-copyright" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">copyright</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">Juan Jose Guerra Haba (c) 2016</code>
+</small><br />
+</div>
+<div class="debug-inner-theme" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">theme</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">light</code>
+</small><br />
+</div>
+<div class="debug-inner-changeTheme" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">changeTheme</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-totop" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">totop</h5> [<span style="color:whiteSmoke; font-size:10px;">Boolean</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">true</code>
+</small><br />
+</div>
+<div class="debug-inner-meta" style="color:#FF0000; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">meta</h5> [<span style="color:whiteSmoke; font-size:10px;">Object</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<div class="debug-inner-title" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">title</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer :: Rastreo de Objetos JS - by GUERRATRON</code>
+</small><br />
+</div>
+<div class="debug-inner-description" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">description</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">WrapperTracer :: Rastreo de Objetos JS and its methods traits - by GUERRATRON</code>
+</small><br />
+</div>
+<div class="debug-inner-keywords" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">keywords</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">wrappertracer,js,code,debug,trait,traits,trace,tracer,wrapper,guerratron</code>
+</small><br />
+</div>
+<div class="debug-inner-charset" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">charset</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">utf-8</code>
+</small><br />
+</div>
+<div class="debug-inner-language" style="color:#FF6600; border:1px ridge whiteSmoke; padding:6px;">
+<h5 style="display:inline;">language</h5> [<span style="color:whiteSmoke; font-size:10px;">String</span>] : 
+<small style="background:black; color:lime; padding:6px; margin:4px;">
+<code style="font-size:110%;">es</code>
+</small><br />
+</div>
+</small><br />
+</div>
+</div> 
+
+
+<script> prettyPrint(); </script>
+<script type="text/javascript" src="scripts/linenumber.js"> </script>
+<script type="text/javascript" src="scripts/smooth-scroll/smooth-scroll.min.js"> </script>
+<script type="text/javascript" src="scripts/template.js"> </script>
+
+</body>
+</html>

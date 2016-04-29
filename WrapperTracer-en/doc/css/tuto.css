@@ -1,0 +1,96 @@
+body{text-align:justify; font-family:calibri,"courier","serif"; font-size:120%;}
+/*TOTAL DIV*/
+#divTotal{width:100%; margin:0; padding: 4px; background:url("../img/fondo_inv.png"); text-align: justify;}
+/*CONTAINER*/
+#container{max-width:70%; margin:auto; background:white; padding: 5%;}
+#container h1{max-width:40%; margin:auto; color:navy; text-shadow:1px 1px 2px slateBlue;}
+/*HEADER*/
+header{max-width:85%; margin:auto; background:navajoWhite; color:#333333; border-radius:8px; box-shadow:2px 2px 4px darkGray; padding:15px; margin-top:40px;}
+header span{float:left; font-size:xx-large; font-weight:bolder; color:blue;}
+header sub{float:left; color:maroon; margin:6px;}
+header img{float:right; max-width:25%;}
+header blockquote{max-width:70%;}
+header blockquote>blockquote{background:LemonChiffon; padding:14px; border-radius:10px; max-width:70%;}
+header #torotron{float:none; max-height:1em;}
+/*CODE*/
+code{display:block; background:whiteSmoke; padding:10px; border:2px ridge gray; border-radius:8px; box-shadow:2px 2px 4px darkGray; font-family:"calibri","Arial","courier","monospace"; font-size:100%; line-height: 120%; text-align:left;}
+code>span{display:block; background:none; margin:1px 6px; font-size:90%; line-height: 120%; }
+code>span:hover{background:lightYellow;}
+code i:hover{background:Yellow;}
+.var{color:darkGreen; font-weight:bolder}
+.ns{color: indigo; font-weight:bolder;} /*namespace*/
+.prop{color:blue;}
+.param{color:indigo;}
+.func{color:red;}
+.obj{color:maroon; font-weight:bolder;}
+.meth{color:navy;}
+.nfunc{color:black;}
+.txt{color:gray;}
+.comment{color:green; font-size:medium;}
+.bool{color:Purple; font-weight:bolder;}
+
+.mini_obj{color:chocolate; font-weight:bolder;}
+.mini_meth{color:steelBlue;}
+.mini_nfunc{color:black;}
+/*OTHERS*/
+.clearfix{clear:both;}
+.PD{background:LemonChiffon; padding:2px 4px; border-radius:6px; font-size:smaller; font-style:italic;}
+.alert{background:LightSalmon; color: maroon; padding:12px; margin: 1px; border-radius:6px; font-size:smaller; font-style:italic;}
+.resaltar{background: yellow; color:darkGreen; cursor: pointer; padding: 0 2px;}
+/*FOOTER*/
+#footer{max-width:85%; margin:auto; background:darkGray; color:whiteSmoke; padding:15px;}
+
+	abbr{
+		font-style: italic;
+		cursor: pointer;
+		border-bottom: 1px dotted;
+	}
+	#container nav{
+		/*clear:both;*/
+		background: whiteSmoke;
+		padding: 1px;
+	}
+	#container nav .caption {
+		float:left;
+		color: darkGray;
+		margin: 15px 2px;
+    vertical-align: middle;
+	}
+	#container nav ul{
+		list-style: none;
+		float:left;
+	}
+	#container nav ul li{
+		float:left;
+		margin: 2px;
+		padding:1px 4px;
+		background: lightBlue;
+		border-radius: 6px;
+		box-shadow: 1px 2px 4px;
+		text-decoration: none;
+	}
+	#container nav ul li:hover{
+		background: lightBlue;
+		box-shadow: none;
+	}
+	#container nav ul li a{
+		text-decoration: none;
+	}
+
+	.intro{
+		color: #333333;
+		background: #EDEDED;
+		padding: 10px;
+	}
+
+	/*BUTTONS*/
+	.button30{
+		width:30px;
+		height: 30px;
+		display: inline-block;
+	}
+	/*.btnLanguage{ background: url(../img/canvasShapesButtons.png) 0 0; }
+	REVERSE: */
+	.btnPlusMinus{ background: url(../img/plusMinus.jpg); }
+	
+	.wrapperTitleProperty{font-size: 1.2em;}

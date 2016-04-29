@@ -1,0 +1,34 @@
+{
+  "package": {
+    "name"            : "WrapperTracer/WrapperTracer-es",
+    "version"         : "1.0.0",
+    "description"     : "Rastreo de métodos de Objetos JS",
+    "logoFile"        : "img/WrapperTracer-logo.png",
+    "main"            : "WrapperTracer.es.js",
+    "date"            : "29-04-16",
+    "author"          : "Juan José Guerra Haba",
+    "alias"           : "GuerraTron",
+    "email"           : "mailto:dinertron@gmail.com",
+    "web"             : "http://jumla-droid.com",
+    "copyright"       : "Juan Jose Guerra Haba (c) 2016"
+  },
+  "paths": {
+    "documentation"   : "./doc/",
+    "tutorials"       : "./doc/tutorial-1_tuto_WrapperTracer.es.html",
+    "examples"        : "./doc/tutorial-2_examples_WrapperTracer.es.html",
+    "readme"          : "./LEEME.md"
+  },
+  "opts": {
+    "encoding"        : "utf8",
+    "dateFormat"      : "ddd MMM Do YYYY",
+    "applicationName" : "WrapperTracer",
+    "applicationTitle": "WrapperTracer :: Rastreo de Objetos JS - by GUERRATRON",
+    "meta": {
+      "title"             : "WrapperTracer :: Rastreo de Objetos JS - by GUERRATRON",
+      "description"       : "WrapperTracer :: Rastreo de Objetos JS and its methods traits - by GUERRATRON",
+      "keywords"          : "wrappertracer,js,code,debug,trait,traits,trace,tracer,wrapper,guerratron",
+      "charset"           : "utf-8",
+      "language"          : "es"
+    }
+  }
+}
