@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Wrappertracer by guerratron</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Wrappertracer</h1>
+      <h2 class="project-tagline">Analysis and &#39;JS objects&#39; Traces.</h2>
+      <a href="https://github.com/guerratron/WrapperTracer" class="btn">View on GitHub</a>
+      <a href="https://github.com/guerratron/WrapperTracer/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/guerratron/WrapperTracer/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <blockquote>
+<hr>
+
+<p>'WrapperTracer' (Class JS) - Analysis and 'JS Objects' Traces.<br>
+  Author: Juan José Guerra Haba - <a href="mailto:dinertron@gmail.com">dinertron@gmail.com</a> - Marzo de 2016<br>
+  License: Free BSD. &amp; Open GPL v.3. Keep credit, please.<br>
+  Versión: 1.0.0 BETA<br>
+  File: WrapperTracer.js               Main Class: WrapperTracer.js  </p>
+
+<hr>
+</blockquote>
+
+<h1>
+<a id="wrappertracer" class="anchor" href="#wrappertracer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WrapperTracer</h1>
+
+<p><a href="http://guerratron.github.io/WrapperTracer" title="WrapperTracer page"><img src="img/WrapperTracer-logo.png" alt="WrapperTracer logo" title="WrapperTracer GitHub page"></a>
+It is a class that creates <strong>Javascript</strong> <em>wrapper</em> objects to allow <em>tracking</em> of the executed methods.</p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+
+<ol>
+<li>Do not in any way alter the original object</li>
+<li>Fully OOP</li>
+<li>Cross-browser</li>
+<li>Philosophy MVC</li>
+<li>Reduction to minimum of code to use by the user.</li>
+</ol>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Simply call the constructor with two parameters: The object <em>tracking</em> and <strong>DOMElement</strong> container element that will house the results for the <strong>GUI</strong>. The container element parameter can be a string containing the element <strong>id</strong>.
+Ej:  </p>
+
+<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> wrapped <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">WrapperTracer</span>(obj1, <span class="pl-s"><span class="pl-pds">"</span>containerUI<span class="pl-pds">"</span></span>);</pre></div>
+
+<p>Of course you must be loaded before the <strong>script</strong> in the HTML header. </p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>WrapperTracer.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h2>
+<a id="explanatory" class="anchor" href="#explanatory" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Explanatory</h2>
+
+<p>It serve of <strong>TRACER</strong> to obtain a visual representation of methods's execution cycle, as help with information (elapsed time, nesting, methods type, parameters, ...).<br>
+This class relies heavily on the utility functions of an internal object implemented in the same file, the <strong>'Util'</strong> object, which contains methods and objects statics that although they are geared specifically for object <em>'wrapper'</em>, they could be used outside the same using his <em>'classpath'</em>.</p>
+
+<h2>
+<a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Public API</h2>
+
+<dl>
+  <dt>Constructor</dt>
+    <dd> WrapperTracer (object, idElement, callback);</dd>
+  <dt>Getters</dt>
+    <dd>getId ();</dd>
+    <dd>getTarget ();</dd>
+    <dd>getWrapped ();</dd>
+    <dd>getCallback ();</dd>
+    <dd>getProps ();</dd>
+    <dd>getInfo ();</dd>
+    <dd>getContainer ();</dd>
+    <dd>getUtil ()</dd>
+  <dt>Setters</dt>
+    <dd>setContainer (idElement);</dd>
+</dl>
+
+<h2>
+<a id="authoring" class="anchor" href="#authoring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authoring</h2>
+
+<p>Created and developed entirely by Juan Jose Guerra Haba. &lt;<a href="mailto:dinertron@gmail.com">dinertron@gmail.com</a>&gt;<br>
+Copyright 2015 © <a href="mailto:dinertron@gmail.com" title="author">GuerraTron</a><br>
+License GPL v3</p>
+
+<h3>
+<a id="developing--tools" class="anchor" href="#developing--tools" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Developing &amp; Tools</h3>
+
+<p>Created with <a href="https://github.com/Nodeclipse/nodeclipse-1">Nodeclipse</a>
+ (<a href="http://marketplace.eclipse.org/content/nodeclipse">Eclipse Marketplace</a>, <a href="http://www.nodeclipse.org">site</a>)<br>
+Nodeclipse is free open-source project that grows with your contributions.<br>
+Debug by Firefox + Firebug
+Additional editing and cleaning withNotepad++</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/guerratron/WrapperTracer">Wrappertracer</a> is maintained by <a href="https://github.com/guerratron">guerratron</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
