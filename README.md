@@ -8,7 +8,7 @@
 > ----------------------------------------------------------------------------------------------------
 
 # WrapperTracer
-[![WrapperTracer logo](img/WrapperTracer-logo.png "WrapperTracer GitHub page")](http://guerratron.github.io/WrapperTracer "WrapperTracer page")
+[![WrapperTracer logo](WrapperTracer-en/img/WrapperTracer-logo.png "WrapperTracer GitHub page")](http://guerratron.github.io/WrapperTracer "WrapperTracer page")
 It is a class that creates **Javascript** *wrapper* objects to allow *tracking* of the executed methods.
 
 ## Features 
