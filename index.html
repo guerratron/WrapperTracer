@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>Wrappertracer by guerratron</title>
@@ -8,11 +8,22 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/tuto.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/template.css" media="screen">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<!-- <script type="text/javascript" src="javascript/main.js"></script> -->
+		<!-- SLICK SLIDE
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css"/> -->
+		<link rel="stylesheet" type="text/css" href="javascripts/slick/slick-min.css"/>
   </head>
   <body>
     <section class="page-header">
+      <img src="img/sello_js.png" alt="js_ico" title="script Javascript" style="position:absolute; left:2%;" />
       <h1 class="project-name">Wrappertracer</h1>
+      <img src="img/WrapperTracer_logo.png" alt="wrappertracer_logo" title="WrapperTracer logo" />
       <h2 class="project-tagline">Analysis and &#39;JS objects&#39; Traces.</h2>
+      <a href="http://guerratron.github.io/guerratron.github.io/" class="btn" style=""><img src="img/home.png" alt="home_icon" title="Guerratron GitHub home page" /></a>
+			<a href="doc/index.html" class="btn">Documentation</a>
       <a href="https://github.com/guerratron/WrapperTracer" class="btn">View on GitHub</a>
       <a href="https://github.com/guerratron/WrapperTracer/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/guerratron/WrapperTracer/tarball/master" class="btn">Download .tar.gz</a>
@@ -20,95 +31,162 @@
 
     <section class="main-content">
       <blockquote>
-<hr>
+        <hr />
+        <nav>
+          <span class="caption">INDEX:</span>
+          <ul id="TOC">
+            <li><a data-scroll href="#wrappertracer" title="Explanatory">Explanatory</a></li>
+            <li><a data-scroll href="#features" title="script features">Features</a></li>
+            <li><a data-scroll href="#usage" title="the script usage">Usage</a></li>
+            <li><a data-scroll href="#public-api" title="methods and public properties">Public API</a></li>
+            <li><a data-scroll href="#authoring" title="script authorship">Authorship</a></li>
+            <li><a data-scroll href="#developing-tools" title="tools for code developing">Tools</a></li>
+          </ul>
+          <br class="clearfix" />
+        </nav>
+        
+        <section class="carousel" style="text-align: center;">
+        <!-- SLICK SLIDE
+          <div class="slick-slide-target1">
+            <div>
+              <a href="img/zonesGUI.png"> <img src="img/zonesGUI.png" alt="GUI areas" title="GUI areas" /> </a>
+              <span style="font-size:smaller;">buttons, canvas, options, footer, ...</span>
+            </div>
+            <div>	<a href="img/zoneOptions2.png"> <img src="img/zoneOptions2.png" alt="GUI options area" title="options area" /> </a> </div>
+            <div>
+              <a href="img/zoneCoordinates.png"> <img src="img/zoneCoordinates.png" alt="GUI coordinates area" title="coordinates area" /> </a>
+              <span style="font-size:smaller;">Coordinates area</span>
+            </div>
+            <div>	<a href="img/ex1.jpg"> <img src="img/ex1.jpg" alt="example-1" title="bexample 1" /> </a> </div>
+            <div>	<a href="img/ex2.png"> <img src="img/ex2.png" alt="example-2" title="example 2" /> </a> </div>
+            <div>	<a href="img/ex3.png"> <img src="img/ex3.png" alt="example-3" title="example 3" /> </a> </div>
+            <div>	<a href="img/ex4.png"> <img src="img/ex4.png" alt="example-4" title="example 4" /> </a> </div>
+            <div>	<a href="img/ex5.png"> <img src="img/ex5.png" alt="example-5" title="example 5" /> </a> </div>
+            <div>	<a href="img/canvasShapesButtons.png"> <img src="img/canvasShapesButtons.png" alt="GUI buttons area" title="buttons area" /> </a> </div>
+          </div> -->
+        </section>
+        
+        <header>'WrapperTracer' (Class JS) - Analysis and 'JS Objects' Traces.<br>
+                Library: 'PolyArea'.<br>
+                Author: Juan José Guerra Haba - <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#100;&#105;&#110;&#x65;&#x72;&#x74;&#114;&#x6f;&#110;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#100;&#105;&#110;&#x65;&#x72;&#x74;&#114;&#x6f;&#110;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a> - Marzo de 2016<br>
+                License: Free BSD. &amp; Open GPL v.3. Keep credit, please.<br>
+                Versión: 1.0.0 BETA<br>
+                File: WrapperTracer.js               Main Class: WrapperTracer.js  
+        </header>
 
-<p>'WrapperTracer' (Class JS) - Analysis and 'JS Objects' Traces.<br>
-  Author: Juan José Guerra Haba - <a href="mailto:dinertron@gmail.com">dinertron@gmail.com</a> - Marzo de 2016<br>
-  License: Free BSD. &amp; Open GPL v.3. Keep credit, please.<br>
-  Versión: 1.0.0 BETA<br>
-  File: WrapperTracer.js               Main Class: WrapperTracer.js  </p>
+        <hr />
 
-<hr>
-</blockquote>
+        <h1><a id="wrappertracer" class="anchor" href="#wrappertracer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WrapperTracer</h1>
+        
+        <p> It is a class that creates <strong>Javascript</strong> <em>wrapper</em> objects to allow <em>tracking</em> of the executed methods.</p>
+      </blockquote>
+      
+      <p>It serve of <strong>TRACER</strong> to obtain a visual representation of methods's execution cycle, as help with information (elapsed time, nesting, methods type, parameters, ...).<br>
+      This class relies heavily on the utility functions of an internal object implemented in the same file, the <strong>'Util'</strong> object, which contains methods and objects statics that although they are geared specifically for object <em>'wrapper'</em>, they could be used outside the same using his <em>'classpath'</em>.</p>
 
-<h1>
-<a id="wrappertracer" class="anchor" href="#wrappertracer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WrapperTracer</h1>
+      <h2><a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
 
-<p><a href="http://guerratron.github.io/WrapperTracer" title="WrapperTracer page"><img src="img/WrapperTracer-logo.png" alt="WrapperTracer logo" title="WrapperTracer GitHub page"></a>
-It is a class that creates <strong>Javascript</strong> <em>wrapper</em> objects to allow <em>tracking</em> of the executed methods.</p>
+      <ol>
+        <li>Do not in any way alter the original object</li>
+        <li>Fully OOP</li>
+        <li>Cross-browser</li>
+        <li>Philosophy MVC</li>
+        <li>Reduction to minimum of code to use by the user.</li>
+      </ol>
 
-<h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2>
+      <h2><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
-<ol>
-<li>Do not in any way alter the original object</li>
-<li>Fully OOP</li>
-<li>Cross-browser</li>
-<li>Philosophy MVC</li>
-<li>Reduction to minimum of code to use by the user.</li>
-</ol>
+      <p>Simply call the constructor with two parameters: The object <em>tracking</em> and <strong>DOMElement</strong> container element that will house the results for the <strong>GUI</strong>. The container element parameter can be a string containing the element <strong>id</strong>.
+      Ej:  </p>
 
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+      <div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> wrapped <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">WrapperTracer</span>(obj1, <span class="pl-s"><span class="pl-pds">"</span>containerUI<span class="pl-pds">"</span></span>);</pre></div>
 
-<p>Simply call the constructor with two parameters: The object <em>tracking</em> and <strong>DOMElement</strong> container element that will house the results for the <strong>GUI</strong>. The container element parameter can be a string containing the element <strong>id</strong>.
-Ej:  </p>
+      <p>Of course you must be loaded before the <strong>script</strong> in the HTML header. </p>
 
-<div class="highlight highlight-source-js"><pre>    <span class="pl-k">var</span> wrapped <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">WrapperTracer</span>(obj1, <span class="pl-s"><span class="pl-pds">"</span>containerUI<span class="pl-pds">"</span></span>);</pre></div>
+      <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>WrapperTracer.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
 
-<p>Of course you must be loaded before the <strong>script</strong> in the HTML header. </p>
+      <h2>
+      <a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Public API</h2>
 
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>WrapperTracer.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+      <dl>
+        <dt>Constructor</dt>
+          <dd> WrapperTracer (object, idElement, callback);</dd>
+        <dt>Getters</dt>
+          <dd>getId ();</dd>
+          <dd>getTarget ();</dd>
+          <dd>getWrapped ();</dd>
+          <dd>getCallback ();</dd>
+          <dd>getProps ();</dd>
+          <dd>getInfo ();</dd>
+          <dd>getContainer ();</dd>
+          <dd>getUtil ()</dd>
+        <dt>Setters</dt>
+          <dd>setContainer (idElement);</dd>
+      </dl>
 
-<h2>
-<a id="explanatory" class="anchor" href="#explanatory" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Explanatory</h2>
+      <h2>
+      <a id="authoring" class="anchor" href="#authoring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authoring</h2>
 
-<p>It serve of <strong>TRACER</strong> to obtain a visual representation of methods's execution cycle, as help with information (elapsed time, nesting, methods type, parameters, ...).<br>
-This class relies heavily on the utility functions of an internal object implemented in the same file, the <strong>'Util'</strong> object, which contains methods and objects statics that although they are geared specifically for object <em>'wrapper'</em>, they could be used outside the same using his <em>'classpath'</em>.</p>
+      <p>Created and developed entirely by <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#100;&#105;&#110;&#x65;&#x72;&#x74;&#114;&#x6f;&#110;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;" title="author">GuerraTron</a><br>
+      Copyright <a href="https://github.com/2016" class="user-mention">2016</a> © Juan José Guerra Haba<br>
+      License GPL v3</p>
 
-<h2>
-<a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Public API</h2>
+      <p><em>&lt;&lt; I hope it can be useful to someone as it has been for me. In this case it would be appreciated email commenting use or suggestions for future improvements.  <br />
+           ¡ KEEP CREDITS, PLEASE ! &gt;&gt;</em></p>
 
-<dl>
-  <dt>Constructor</dt>
-    <dd> WrapperTracer (object, idElement, callback);</dd>
-  <dt>Getters</dt>
-    <dd>getId ();</dd>
-    <dd>getTarget ();</dd>
-    <dd>getWrapped ();</dd>
-    <dd>getCallback ();</dd>
-    <dd>getProps ();</dd>
-    <dd>getInfo ();</dd>
-    <dd>getContainer ();</dd>
-    <dd>getUtil ()</dd>
-  <dt>Setters</dt>
-    <dd>setContainer (idElement);</dd>
-</dl>
+      <h3>
+      <a id="developing-tools" class="anchor" href="#developing-tools" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Developing &amp; Tools</h3>
 
-<h2>
-<a id="authoring" class="anchor" href="#authoring" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authoring</h2>
-
-<p>Created and developed entirely by Juan Jose Guerra Haba. &lt;<a href="mailto:dinertron@gmail.com">dinertron@gmail.com</a>&gt;<br>
-Copyright 2015 © <a href="mailto:dinertron@gmail.com" title="author">GuerraTron</a><br>
-License GPL v3</p>
-
-<h3>
-<a id="developing--tools" class="anchor" href="#developing--tools" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Developing &amp; Tools</h3>
-
-<p>Created with <a href="https://github.com/Nodeclipse/nodeclipse-1">Nodeclipse</a>
- (<a href="http://marketplace.eclipse.org/content/nodeclipse">Eclipse Marketplace</a>, <a href="http://www.nodeclipse.org">site</a>)<br>
-Nodeclipse is free open-source project that grows with your contributions.<br>
-Debug by Firefox + Firebug
-Additional editing and cleaning withNotepad++</p>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/guerratron/WrapperTracer">Wrappertracer</a> is maintained by <a href="https://github.com/guerratron">guerratron</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+      <p>Created with <a href="https://github.com/Nodeclipse/nodeclipse-1">Nodeclipse</a>
+       (<a href="http://marketplace.eclipse.org/content/nodeclipse">Eclipse Marketplace</a>, <a href="http://www.nodeclipse.org">site</a>)<br>
+      Nodeclipse is free open-source project that grows with your contributions.<br>
+      Debug by Firefox + Firebug
+      Additional editing and cleaning with Notepad++</p>
 
     </section>
+    
+    <footer class="site-footer">
+      <span class="site-footer-owner"><img src="img/WrapperTracer-logo-mini.gif" alt="wrappertracer_logo" title="WrapperTracer logo" /> <a href="https://github.com/guerratron/WrapperTracer">Wrappertracer</a> is maintained by <a href="https://github.com/guerratron">guerratron</a>. <img src="img/torotron_logo.png" alt="guerratron logo" title="author" /></span>
 
+      <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a>  modified by <a href="https://github.com/guerratron">guerratron</a>. <img src="img/torotron_logo.png" alt="guerratron logo" title="guerratron logo" /></span>
+    </footer>
+
+      <!-- TO-TOP BUTTON -->
+      <a data-scroll data-options='{ "easing": "easeOutQuad" }' class="totop" href="#"><span style="font-size: x-large">&Delta;</span></a>
+    
+			<!-- SLICK SLIDE
+			<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js"></script> -->
+			<script type="text/javascript" src="javascripts/slick/slick.min.js"></script>
+      <!-- SMOOTH-SCROLL -->
+      <script type="text/javascript" src="javascripts/smooth-scroll/smooth-scroll.min.js"></script>
+			
+			<script>
+				// Can also be used with $(window).load(function() {
+				$(document).ready(function() {
+          //SLICK SLIDE from: http://kenwheeler.github.io/slick/
+					/*$('.slick-slide-target1').slick({
+						dots: true,
+						infinite: true,
+						speed: 600,
+						slidesToShow: 2,
+						centerMode: true,
+						variableWidth: false,
+						useCSS: true,
+						swipeToSlide: false,
+						respondTo: "min",
+						pauseOnDotsHover: true,
+						autoplay: true,
+						mobileFirst: true,
+						infinite: false,
+						focusOnSelect: true,
+						centerMode: true,
+						adaptiveHeight: false,
+					});*/
+          
+          //SMOOTH-SCROLL by https://github.com/cferdinandi THANKS!
+          smoothScroll.init();
+				});
+		</script>
   
   </body>
 </html>
